@@ -1,13 +1,13 @@
 
 /*
-  Version 1.6
-  6/8/2015
+  Version 1.0
+  8/8/2016
 */
 
 /*global define,document,location,require */
 /*jslint sloppy:true,nomen:true,plusplus:true */
 /*
- | Copyright 2014 Esri
+ | Copyright 2016 Esri
  |
  | Licensed under the Apache License, Version 2.0 (the "License");
  | you may not use this file except in compliance with the License.
