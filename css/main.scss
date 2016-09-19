@@ -81,13 +81,6 @@ body{
   padding-right:10px;
   padding-left:10px;
 }
-#rankLabel{
-  float:left;
-  max-width: 80%;
-  font-weight: bold;
-  font-size:14px;
-  line-height: normal;
-}
 .calcite .esriSimpleSlider .esriSimpleSliderDecrementButton, .calcite .esriSimpleSlider .esriSimpleSliderDecrementButton:hover, .calcite .esriSimpleSlider .esriSimpleSliderDecrementButton:focus{
   border-top: 1px solid #efefef;
 }
@@ -106,7 +99,7 @@ body{
   height: calc(100% - 112px);
   padding-left:.4em;
   padding-right: .4em;
-  padding-bottom: 32px;
+  padding-bottom: 48px;
 }
 #title{
   padding: 0 5px 0 5px;
@@ -119,6 +112,7 @@ body{
 }
 
 #toggleInfo, #legendInfo{
+  margin: 0 4px 0 4px;
   color:#333;
   font-size:16px;
   height:18px;

@@ -42,27 +42,6 @@
       "label": "Button text color"
     }]
   },{
-    "category": "Selection Symbol",
-    "fields":[
-      {
-        "type": "color",
-        "fieldName": "symbolcolor",
-        "tooltip": "Feature selection color",
-        "label": "Color Theme:"
-      },{
-        "type": "number",
-        "fieldName": "symbolsize",
-        "label": "Symbol size"
-      },
-      {
-        "type":"number",
-        "fieldName": "symbolopacity",
-        "label": "Opacity",
-        "tooltip": "Defaults to .8",
-        "constraints":{"min":0 , "max":1, "places": 2 }
-      }
-    ]
-  }, {
     "category": "Theme",
     "fields": [{
       "type": "options",
@@ -138,29 +117,25 @@
       }]
     },{
       "type": "paragraph",
-      "value": "Display text listing the rank # of the selected feature. Define custom text to append to the rank number."
-    },{
-      "type":"boolean",
-      "fieldName": "showRankText"
+      "value": "Display text listing the rank # of the selected feature. Define custom text to wrap around the current rank and total. "
     },{
       "type": "string",
-      "fieldName": "rankText",
-      "label": "Custom text to append to rank #"
+      "fieldName": "rankLabelTemplate",
+      "label": "Custom text to display in paging area",
+      "placeHolder": "Rank {current} of {total}"
     },{
       "type": "paragraph",
       "value": "By default the app will zoom to the extent of the selected features. If you'd like to modify the zoom level specify a new zoom level value here."
     },{
       "type": "number",
       "fieldName": "selectionZoomLevel",
-      "label": "Specify zoom level",
-      "placeHolder": "Defaults to Rank #"
+      "label": "Specify zoom level"
     }]
   }],
   "values": {
     "legend": true,
     "order": "DESC",
     "count":10,
-    "showRankText": true,
     "symbolcolor": "#337ab7",
     "symbolsize": "11",
     "symbolopacity": "0.80",

@@ -1,7 +1,7 @@
 /*global define,location */
 /*jslint sloppy:true */
 /*
- | Copyright 2016 Esri
+ | Copyright 2014 Esri
  |
  | Licensed under the Apache License, Version 2.0 (the "License");
  | you may not use this file except in compliance with the License.
@@ -36,8 +36,7 @@ define({
   //"layerId": "OSMPTrails_5787",
   //"field": "Length_mi",
   "order": "DESC", // ASC or DESC
-  "rankText": "Rank #",
-  "showRankText": true,
+  "rankLabelTemplate": "Rank {current} of {total}",
   "count": 10,
   "symbolcolor": "#337ab7",
   "symbolsize": "11",

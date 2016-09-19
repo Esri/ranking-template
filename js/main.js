@@ -1,7 +1,7 @@
 /*global define,document */
 /*jslint sloppy:true,nomen:true */
 /*
- | Copyright 2016 Esri
+ | Copyright 2014 Esri
  |
  | Licensed under the Apache License, Version 2.0 (the "License");
  | you may not use this file except in compliance with the License.
@@ -36,9 +36,11 @@ define([
 
   "esri/arcgis/utils",
   "esri/tasks/query",
+  "esri/graphic",
 
   "esri/dijit/HomeButton",
   "esri/layers/FeatureLayer",
+  "esri/layers/GraphicsLayer",
   "esri/graphicsUtils",
 
   "application/MapUrlParams",
@@ -55,8 +57,9 @@ define([
   ContentPane,
   registry,
   arcgisUtils,
-  Query, HomeButton,
+  Query, Graphic, HomeButton,
   FeatureLayer,
+  GraphicsLayer,
   graphicsUtils,
   MapUrlParams
 ) {
@@ -162,6 +165,9 @@ define([
         bingMapsKey: this.config.bingKey
       }).then(lang.hitch(this, function(response) {
         this.map = response.map;
+        // Add a graphics layer to show symbols
+        this.symbolLayer = new GraphicsLayer();
+        this.map.addLayer(this.symbolLayer);
         var title = this.config.title || response.itemInfo.item.title;
         document.title = title;
         dom.byId("title").innerHTML = title;
@@ -177,18 +183,16 @@ define([
         if (params.markerGraphic) {
           // Add a marker graphic with an optional info window if
           // one was specified via the marker url parameter
-          require(["esri/layers/GraphicsLayer"], lang.hitch(this, function(GraphicsLayer) {
-            var markerLayer = new GraphicsLayer();
+          var markerLayer = new GraphicsLayer();
 
-            this.map.addLayer(markerLayer);
-            markerLayer.add(params.markerGraphic);
+          this.map.addLayer(markerLayer);
+          markerLayer.add(params.markerGraphic);
 
-            if (params.markerGraphic.infoTemplate) {
-              this.map.infoWindow.setFeatures([params.markerGraphic]);
-              this.map.infoWindow.show(params.markerGraphic.geometry);
-            }
-            this.map.centerAt(params.markerGraphic.geometry);
-          }));
+          if (params.markerGraphic.infoTemplate) {
+            this.map.infoWindow.setFeatures([params.markerGraphic]);
+            this.map.infoWindow.show(params.markerGraphic.geometry);
+          }
+          this.map.centerAt(params.markerGraphic.geometry);
         }
         if (this.config.legend) {
           // enable legend button and add legend
@@ -227,11 +231,6 @@ define([
           }));
         }
         if (analysisLayer) {
-          // Setup selection color, opacity, size
-          var style = document.createElement("style");
-          var customStyle = "path[data-selected] {stroke:" + this.config.symbolcolor + ";stroke-width: " + this.config.symbolsize + ";stroke-opacity: " + this.config.symbolopacity + ";}";
-          style.appendChild(document.createTextNode(customStyle));
-          document.head.appendChild(style);
           this._calculateStatistics(analysisLayer);
         }
       }), function(error) {
@@ -257,6 +256,7 @@ define([
             query.outFields = ["*"];
 
             layer.queryFeatures(query, lang.hitch(this, function(results) {
+
               // get top x features and create slides.
               domClass.remove(document.body, "app-loading");
               var topResults = results.features.slice(0, this.config.count);
@@ -268,7 +268,8 @@ define([
                 domClass.add("titleHeader", "hide");
                 domClass.remove("slideNav", "hide");
                 domClass.remove("toolbar", "hide");
-                layer.styling = false;
+                layer.hide();
+                topResults = topResults.reverse();
                 this._createFeatureSlides(topResults, layer);
               }));
             }), lang.hitch(this, function(error) {
@@ -304,8 +305,20 @@ define([
         domConstruct.place(pane.domNode, dom.byId(slide.id));
       }));
       var featureSwipe = new Swiper(".swiper-container", {
+        a11y: true,
         pagination: ".swiper-pagination",
-        paginationType: "fraction",
+        paginationType: "custom",
+        paginationCustomRender: lang.hitch(this, function(swiper, current, total) {
+          var template = this.config.rankLabelTemplate;
+          if (template === "") {
+            template = "Rank {current} of {total}";
+          }
+          var labelObj = {
+            current: swiper.slides.length - swiper.activeIndex,
+            total: total
+          };
+          return "<span class='page-label'>" + lang.replace(template, labelObj) + "</span>";
+        }),
         nextButton: ".swiper-button-next",
         prevButton: ".swiper-button-prev"
       });
@@ -334,40 +347,25 @@ define([
       }));
     },
     _goToSlide: function(featureSwipe, layer) {
-      // calculate ranking text
-      if (this.config.showRankText) {
-        var rankLabel = dom.byId("rankLabel");
-        var count;
-        var rankTemplate = "{rankText} {rankCount}";
-        if (this.config.order === "ASC") {
-          count = featureSwipe.activeIndex + 1;
-        } else {
-          count = featureSwipe.slides.length - featureSwipe.activeIndex;
-        }
-        rankLabel.innerHTML = lang.replace(rankTemplate, {
-          rankText: this.config.rankText,
-          rankCount: count
-        });
-      }
       this._selectFeatures(featureSwipe.slides[featureSwipe.activeIndex].id, layer);
     },
     _toggleInfoPanel: function(active, layer) {
       domQuery(".panel-nav").addClass("hide");
       // remove just the active
-      layer.styling = false;
-      layer.refresh();
+      layer.hide();
       if (active === "legend") {
+        layer.show();
         domClass.remove("legendPanel", "hide");
       } else if (active === "popup") {
         domClass.remove("popupContainer", "hide");
         domClass.remove("slideNav", "hide");
       } else { // activate info
-        layer.styling = true;
-        layer.refresh();
+        layer.show();
         domClass.remove("titleHeader", "hide");
       }
     },
     _selectFeatures: function(id, layer) {
+      this.symbolLayer.clear();
       var q = new Query();
       q.objectIds = [id];
       layer.selectFeatures(q).then(lang.hitch(this, function() {
@@ -375,6 +373,19 @@ define([
 
         var level = this.config.selectionZoomLevel;
         if (sel && sel.length && sel.length > 0) {
+          var renderer = layer.renderer.getSymbol(sel[0]) || null;
+          var geometry = sel[0].geometry || null;
+          if (renderer) {
+            this.symbolLayer.add(new Graphic(geometry, renderer));
+          } else {
+            // Setup selection color, opacity, size
+            var style = document.createElement("style");
+            var customStyle = "path[data-selected] {stroke:" + this.config.symbolcolor + ";stroke-width: " + this.config.symbolsize + ";stroke-opacity: " + this.config.symbolopacity + ";}";
+            style.appendChild(document.createTextNode(customStyle));
+            document.head.appendChild(style);
+            layer.styling = false;
+          }
+
           var extent = graphicsUtils.graphicsExtent(sel);
           if (level !== null) {
             var zoomLoc = extent.getCenter();
