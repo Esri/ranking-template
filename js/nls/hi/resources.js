@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "मानचित्र बनाने में अक्षम"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "रैंकिंग लेयर निर्दिष्ट नहीं है"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "एक्सप्लोर करें"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "लीजेंड",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "लिंक"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "अगला",
+    "previousLabel": "पिछला"
   }
 });

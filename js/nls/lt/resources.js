@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "Žemėlapio sukurti nepavyko"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "Nenurodytas rikiavimo sluoksnis"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "Naršyti"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "legenda",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "Nuoroda"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "Kitas",
+    "previousLabel": "Ankstesnis"
   }
 });

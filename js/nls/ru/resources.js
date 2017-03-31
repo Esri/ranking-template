@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "Не удалось создать карту"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "Слой рангов не указан"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "Изучить"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "легенда",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "Ссылка"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "Следующий",
+    "previousLabel": "Предыдущий"
   }
 });

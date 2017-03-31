@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "ไม่สามารถสร้างแผนที่ได้"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "การจัดอันดับชั้นข้อมูลไม่ได้ระบุ"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "ดาวน์โหลด"
   },
   "toolbar": {
-    "legendLabel": "légende",
-    "facebookShare": "Facebook",
-    "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "legendLabel": "คำอธิบายสัญลักษณ์",
+    "facebookShare": "เฟซบุ๊ค",
+    "twitterShare": "ทวิตเตอร์",
+    "linkShare": "ลิงค์"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "ถัดไป",
+    "previousLabel": "ก่อนหน้า"
   }
 });

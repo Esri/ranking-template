@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "Det går inte att skapa kartan"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "Rangordningslager ej angivet"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "Utforska"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "förklaring",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "Länk"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "Nästa",
+    "previousLabel": "Föregående"
   }
 });

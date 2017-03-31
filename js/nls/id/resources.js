@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "Tidak dapat membuat peta"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "Layer pemeringkat tidak ditentukan"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "Jelajahi"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "legenda",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "Tautan"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "Berikutnya",
+    "previousLabel": "Sebelumnya"
   }
 });

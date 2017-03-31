@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "マップを作成できません"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "ランキング レイヤーが指定されていません"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "調査"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "凡例",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "リンク"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "次へ",
+    "previousLabel": "前へ"
   }
 });

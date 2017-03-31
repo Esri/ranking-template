@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "Imposibil de creat harta"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "Stratul tematic de clasificare nu este specificat"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "Exploraţi"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "legendă",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "Link"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "Următorul",
+    "previousLabel": "Anterior"
   }
 });

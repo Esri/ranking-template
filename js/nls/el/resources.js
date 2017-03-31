@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "Δεν είναι δυνατή η δημιουργία χάρτη"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "Το επίπεδο κατάταξης δεν έχει καθοριστεί"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "Εξερεύνηση"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "υπόμνημα",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "Σύνδεσμος"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "Επόμενο",
+    "previousLabel": "ΠΡΟΗΓΟΥΜΕΝΟ"
   }
 });

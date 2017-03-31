@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "Impossibile creare la mappa"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "Layer classificazione non specificato"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "Esplora"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "legenda",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "Collega"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "Avanti",
+    "previousLabel": "Precedente"
   }
 });

@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "לא ניתן ליצור מפה"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "שכבת דירוג לא הוגדרה."
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "עיין"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "מקרא",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "קישור"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "הבא",
+    "previousLabel": "הקודם"
   }
 });

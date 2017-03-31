@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "Không thể tạo bản đồ"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "Lớp xếp hạng không được xác định"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "Khám phá"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "chú giải",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "Liên kết"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "Tiếp theo",
+    "previousLabel": "Trước"
   }
 });

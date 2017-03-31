@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "Kaarti ei saa luua"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "Järjestuse kihti pole määratud"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "Uurimine"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "legend",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "Link"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "Järgmine",
+    "previousLabel": "Eelmine"
   }
 });

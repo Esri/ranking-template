@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "Harita oluşturulamıyor"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "Sıralama katmanı belirtilmedi"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "Keşfet"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "gösterim",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "Bağlantı"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "Sonraki",
+    "previousLabel": "Önceki"
   }
 });

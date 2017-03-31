@@ -35,20 +35,26 @@ define({
   },
   //"layerId": "OSMPTrails_5787",
   //"field": "Length_mi",
-  "order": "DESC", // ASC or DESC
+  "order": "DESC", // ASC or DESC  DESC (LowToHigh) ASC(HighToLow)
+  "pagingType": "Label", // Bullets, BulletsAndLabel, Label, Progress, Slider
   "rankLabelTemplate": "Rank {current} of {total}",
   "count": 10,
-  "symbolcolor": "#337ab7",
-  "symbolsize": "11",
-  "symbolopacity": ".8",
-  "navcolor": "black", // white or black
-  "bgcolor": "#fff", // side panel background color
+  "symbolcolor": "#00ffff",
+  //"symbolsize": "4",
+  "navcolor": "#fff", // #777 hex color
+  "headerbackground": "#ffffff", // title area background color - defaults to same as sidebar
+  "headercolor": "#5D5D5D", //,"5D5D5D", // title text color
+  "bgcolor": "#ffffff", // side panel background color
   "textcolor": "#5D5D5D", //text color
   "buttontext": null,
-  "buttoncolor": "#e0e0e0",
+  "buttoncolor": "#4DBD33",
+  "socialshare": true,
+  "autoloop": true,
+  "autoplay": false,
+  "autoplayspeed": "5000", // in milliseconds
   "customstyle": null, //'#mapDiv { background-color: #cfdfec; } .arcgisSearch .searchGroup .searchInput { border: 0px solid #BDBDBD; background-color: #fff!important; height: 27px; font-size: 16px; color: #333; } .esriIconZoom:before { color: white; } .arcgisSearch .searchBtn { border: 0px solid #57585A; rgba(0, 0, 0, 0.41); } #mapDiv_graphics_layer path { stroke: rgba(221, 0, 32, 1); stroke-width: 4px; opacity: 0.01; } .icon-menu:before { opacity: 0.01; } input#search_input:focus { outline: none; } .arcgisSearch .searchMenu { border: 0px solid #57585A; } .esriIconClose:before { color: white; } #panelLogo img { max-width: 80px; max-height: 68px; } #panelLogo { width: 81px; padding-top: 3px; } .titleButton.maximize:before { visibility: hidden!important; } .pageHeaderImg { display: none; } .pageTitle { display: none; } .arcgisSearch .hasMultipleSources .searchToggle { display: none!important; } #search_input::-webkit-input-placeholder { color: #3B3C3D; } #search_input::-moz-placeholder { color: #3B3C3D; } #search_input:-ms-input-placeholder { color: #3B3C3D; } #panelTop { height: 79px!important; } #search > div > div.searchBtn.searchSubmit { height: 27px; } .arcgisSearch .searchIcon { line-height: 29px; } #panelSearch { margin: 10px 10px 10px 20px!important; } .esriIconClose:before { color: rgb(134, 134, 134); padding-right: 7px; } #panelTitle { border-bottom: none; } .no-search #panelLogo { width: 87px; padding-right: 19px; } .no-search #panelLogo img { max-width: 86px !important; } #panelText { max-width: 500px; }',
-  "buttontextcolor": "#5D5D5D",
-  "selectionZoomLevel": null, // set zoom level
+  "buttontextcolor": "#fff",
+  "selectionZoomScale": null, // set custom zoom scale
   "bingKey": "", //Enter the url to your organizations bing maps key if you want to use bing basemaps
   //Defaults to arcgis.com. Set this value to your portal or organization host name.
   "sharinghost": location.protocol + "//" + "www.arcgis.com",
@@ -56,6 +62,9 @@ define({
   //If your applcation needs to edit feature layer fields set this value to true. When false the map will
   //be dreated with layers that are not set to editable which allows the FeatureLayer to load features optimally.
   "editable": false,
+  //Replace these with your own bitly key
+  "bitlyLogin": "arcgis",
+  "bitlyKey": "R_b8a169f3a8b978b9697f64613bf1db6d",
   "markerSymbol": "./images/EsriBluePinCircle26.png",
   "markerSymbolWidth": 26,
   "markerSymbolHeight": 26,

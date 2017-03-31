@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "Karttaa ei voi luoda"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "Arvotasoa ei ole määritetty"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "Tutki"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "selite",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "Linkki"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "Seuraava",
+    "previousLabel": "Edellinen"
   }
 });

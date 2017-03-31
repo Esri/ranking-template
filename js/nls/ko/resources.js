@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "맵을 생성할 수 없음"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "순위 레이어가 지정되지 않음"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "탐색"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "범례",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "링크"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "다음",
+    "previousLabel": "이전"
   }
 });

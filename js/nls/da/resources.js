@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "Kan ikke oprette kort"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "Rangordning af lag ikke angivet"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "Udforsk"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "forklaring",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "Link"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "Næste",
+    "previousLabel": "Forrige"
   }
 });

@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "يتعذر إنشاء الخريطة"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "طبقة مرتبة غير مُحددة"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "استكشاف"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "مفتاح الخريطة",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "ارتباط"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "التالي",
+    "previousLabel": "السابق"
   }
 });

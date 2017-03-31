@@ -10,6 +10,10 @@
       "type":"boolean",
       "fieldName": "legend",
       "label": "Show legend"
+    },{
+      "type":"boolean",
+      "fieldName":"socialshare",
+      "label": "Include Facebook, Twitter, Email sharing"
     }]
   }, {
     "category": "Description Panel",
@@ -31,40 +35,53 @@
       "label": "Button text",
       "fieldName": "buttontext",
       "type": "string"
+    }]
+  },{
+    "category": "Colors",
+    "fields": [{
+      "type": "color",
+      "fieldName": "headercolor",
+      "tooltip": "Title text color",
+      "label": "Title text color",
+      "sharedThemeProperty": "header.text"
+    },{
+      "type": "color",
+      "fieldName": "headerbackground",
+      "tooltip": "Title background color",
+      "label": "Title background color",
+      "sharedThemeProperty": "header.background"
+    },{
+      "type": "color",
+      "fieldName": "bgcolor",
+      "tooltip": "Panel background color",
+      "label": "Background color:",
+      "sharedThemeProperty": "body.background"
+    },{
+      "type": "color",
+      "tooltip": "Panel text color",
+      "label": "Text color",
+      "fieldName": "textcolor",
+      "sharedThemeProperty": "body.text"
+    },{
+      "type": "color",
+      "fieldName": "navcolor",
+      "tooltip": "Feature navigation arrow and bullet color",
+      "label": "Navigation arrow and bullet color:"
     },{
       "type": "color",
       "fieldName": "buttoncolor",
       "label": "Button color",
-      "tooltip": "Button color"
+      "tooltip": "Button color",
+      "sharedThemeProperty": "button.background"
     },{
       "type": "color",
       "fieldName": "buttontextcolor",
-      "label": "Button text color"
-    }]
-  },{
-    "category": "Theme",
-    "fields": [{
-      "type": "options",
-      "fieldName": "navcolor",
-      "tooltip": "Feature navigation arrow color",
-      "label": "Arrow color:",
-      "options":[{
-            "label": "Black",
-            "value": "black"
-          },{
-            "label": "White",
-            "value": "white"
-          }]
-    }, {
-      "type": "color",
-      "fieldName": "bgcolor",
-      "tooltip": "Panel background color",
-      "label": "Background color:"
-    }, {
-      "type": "color",
-      "tooltip": "Panel text color",
-      "label": "Text color",
-      "fieldName": "textcolor"
+      "label": "Button text color",
+      "sharedThemeProperty": "button.text"
+    },{
+      "type":"color",
+      "fieldName":"symbolcolor",
+      "label": "Selection symbol color"
     },{
       "type": "paragraph",
       "value": "Use the Custom css option to add css that overwrites rules in the app."
@@ -90,13 +107,15 @@
       }],
       "layerOptions": {
         "supportedTypes": [
-          "FeatureLayer"
+          "FeatureLayer",
+          "FeatureCollection"
         ],
         "geometryTypes": [
           "esriGeometryPoint",
           "esriGeometryLine",
           "esriGeometryPolyline",
-          "esriGeometryPolygon"
+          "esriGeometryPolygon",
+          "esriGeometryMultipoint"
         ]
       }
     },{
@@ -109,40 +128,139 @@
       "fieldName": "order",
       "label": "Rank Order",
       "options":[{
-        "label": "Ascending",
+        "label": "Low to High",
         "value": "ASC"
       },{
-        "label": "Descending",
+        "label": "High to Low",
         "value": "DESC"
       }]
     },{
+      "type": "conditional",
+      "condition": false,
+      "fieldName": "autoplay",
+      "label": "Enable auto play",
+      "items":[
+        {
+          "type":"string",
+          "fieldName": "autoplayspeed",
+          "placeholder": "5000 milliseconds",
+          "label": "Auto play speed (in millseconds)"
+        }
+      ]
+    },{
+      "type": "options",
+      "fieldName": "pagingType",
+      "label": "Bullet Display Type",
+      "options":[{
+        "label": "Bullets",
+        "value": "Bullets"
+      },{
+        "label": "Label",
+        "value": "Label"
+      },{
+        "label": "Bullets And Labels",
+        "value": "BulletsAndLabel"
+      },{
+        "label": "Progress",
+        "value": "progress"
+      },{
+        "label": "Slider",
+        "value": "slider"
+      }]
+    },{
       "type": "paragraph",
-      "value": "Display text listing the rank # of the selected feature. Define custom text to wrap around the current rank and total. "
+      "value": "Display text listing the rank # of the selected feature. Define custom text to wrap around the current rank and total. <br><br> To display the current number and total number, the custom text should include both {current} and {total}.  Here is an example:  This feature is ranked {current} of {total}"
     },{
       "type": "string",
       "fieldName": "rankLabelTemplate",
       "label": "Custom text to display in paging area",
-      "placeHolder": "Rank {current} of {total}"
+      "placeHolder": "{current} of {total}"
     },{
       "type": "paragraph",
       "value": "By default the app will zoom to the extent of the selected features. If you'd like to modify the zoom level specify a new zoom level value here."
     },{
-      "type": "number",
-      "fieldName": "selectionZoomLevel",
-      "label": "Specify zoom level"
+      "type": "string",
+      "fieldName": "selectionZoomScale",
+      "label": "Custom zoom scale",
+      "options":[
+        {
+             "label":"Default",
+             "value":null
+        },{
+            "label":"Countries - Big",
+            "value":"25000000"
+         },{
+            "label":"Countries - Small",
+            "value":"12000000"
+         },
+         {
+            "label":"States/Provinces",
+            "value":"6000000"
+         },
+         {
+            "label":"State/Province",
+            "value":"3000000"
+         },
+         {
+            "label":"Counties",
+            "value":"1500000"
+         },
+         {
+            "label":"County",
+            "value":"750000"
+         },
+         {
+            "label":"Metropolitan Area",
+            "value":"320000"
+         },
+         {
+            "label":"Cities",
+            "value":"160000"
+         },
+         {
+            "label":"City",
+            "value":"80000"
+         },
+         {
+            "label":"Town",
+            "value":"40000"
+         },
+         {
+            "label":"Neighborhood",
+            "value":"20000"
+         },
+         {
+            "label":"Streets",
+            "value":"10000"
+         },
+         {
+            "label":"Street",
+            "value":"5000"
+         },
+         {
+            "label":"Buildings",
+            "value":"2500"
+         },{
+            "label": "Building",
+            "value": "1250"
+         }
+      ]
     }]
   }],
   "values": {
+    "autoplay": false,
+    "socialshare": false,
     "legend": true,
     "order": "DESC",
     "count":10,
-    "symbolcolor": "#337ab7",
-    "symbolsize": "11",
-    "symbolopacity": "0.80",
-    "navcolor": "black",
-    "bgcolor": "#fff",
+    "symbolcolor": "#00ffff",
+    "navcolor": "#fff",
+    "headercolor": "#5d5d5d",
+    "headerbackground": "#ffffff",
+    "bgcolor": "#ffffff",
     "textcolor": "#5d5d5d",
-    "buttoncolor": "#e0e0e0",
-    "buttontextcolor": "#5d5d5d"
+    "buttoncolor": "#4DBD33",
+    "buttontextcolor": "#fff",
+    "pagingType": "Label"
   }
 }

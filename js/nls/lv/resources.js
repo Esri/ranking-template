@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "Nevar izveidot karti"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "Nav norādīts vērtēšanas slānis"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "Izpētiet"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "leģenda",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "Saite"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "Nākamais",
+    "previousLabel": "Iepriekšējais"
   }
 });

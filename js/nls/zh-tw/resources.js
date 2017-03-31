@@ -16,22 +16,22 @@
  */
 define({
   "map": {
-    "error": "Impossible de créer la carte"
+    "error": "無法建立地圖"
   },
   "errors": {
-    "layerNotFound": "Couche de classement non spécifiée"
+    "layerNotFound": "未指定排名圖層"
   },
   "closebutton": {
-    "label": "Explorer"
+    "label": "瀏覽"
   },
   "toolbar": {
-    "legendLabel": "légende",
+    "legendLabel": "圖例",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Lier"
+    "linkShare": "連結"
   },
   "navigation": {
-    "nextLabel": "Suivant",
-    "previousLabel": "Précédent"
+    "nextLabel": "下一頁",
+    "previousLabel": "上一頁"
   }
 });
