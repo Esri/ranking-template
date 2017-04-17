@@ -74,5 +74,4 @@ limitations under the License.
 
 A copy of the license is available in the repository's [license.txt](license.txt) file.
 
-[](Esri Tags: ArcGIS ArcGIS Online Web Application ranking template Esri JavaScript application)
-* [twitter@esri](http://twitter.com/esri)
+
