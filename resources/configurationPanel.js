@@ -1,25 +1,14 @@
 {
   "displayType": "tabs",
   "configurationSettings": [{
-    "category": "Map",
+    "category": "General",
     "fields": [{
       "type": "webmap"
     }, {
       "type": "appproxies"
-    },{
-      "type":"boolean",
-      "fieldName": "legend",
-      "label": "Show legend"
-    },{
-      "type":"boolean",
-      "fieldName":"socialshare",
-      "label": "Include Facebook, Twitter, Email sharing"
-    }]
-  }, {
-    "category": "Description Panel",
-    "fields": [{
+    }, {
       "placeHolder": "Defaults to web map title",
-      "label": "Title:",
+      "label": "Application Title",
       "fieldName": "title",
       "type": "string",
       "tooltip": "Defaults to web map title"
@@ -30,59 +19,57 @@
       "placeHolder": "Defaults to web map description.",
       "tooltip": "Enter content for the details panel",
       "stringFieldOption": "richtext"
-    },{
-      "placeHolder": "Defaults to Explore",
-      "label": "Button text",
-      "fieldName": "buttontext",
-      "type": "string"
     }]
-  },{
-    "category": "Colors",
+  }, {
+    "category": "Theme",
     "fields": [{
+      "type": "subcategory",
+      "label": "Colors"
+    }, {
       "type": "color",
       "fieldName": "headercolor",
       "tooltip": "Title text color",
       "label": "Title text color",
       "sharedThemeProperty": "header.text"
-    },{
+    }, {
       "type": "color",
       "fieldName": "headerbackground",
       "tooltip": "Title background color",
       "label": "Title background color",
       "sharedThemeProperty": "header.background"
-    },{
+    }, {
       "type": "color",
       "fieldName": "bgcolor",
       "tooltip": "Panel background color",
-      "label": "Background color:",
+      "label": "Background color",
       "sharedThemeProperty": "body.background"
-    },{
+    }, {
       "type": "color",
       "tooltip": "Panel text color",
       "label": "Text color",
       "fieldName": "textcolor",
       "sharedThemeProperty": "body.text"
-    },{
+    }, {
       "type": "color",
       "fieldName": "navcolor",
       "tooltip": "Feature navigation arrow and bullet color",
-      "label": "Navigation arrow and bullet color:"
-    },{
+      "label": "Navigation arrow and bullet color"
+    }, {
       "type": "color",
       "fieldName": "buttoncolor",
       "label": "Button color",
       "tooltip": "Button color",
       "sharedThemeProperty": "button.background"
-    },{
+    }, {
       "type": "color",
       "fieldName": "buttontextcolor",
       "label": "Button text color",
       "sharedThemeProperty": "button.text"
-    },{
-      "type":"color",
-      "fieldName":"symbolcolor",
+    }, {
+      "type": "color",
+      "fieldName": "symbolcolor",
       "label": "Selection symbol color"
-    },{
+    }, {
       "type": "paragraph",
       "value": "Use the Custom css option to add css that overwrites rules in the app."
     }, {
@@ -91,12 +78,32 @@
       "tooltip": "Custom css",
       "label": "Custom css"
     }]
-  },{
+  }, {
+    "category": "Options",
+    "fields": [{
+      "placeHolder": "Defaults to Start here",
+      "label": "Button text",
+      "fieldName": "buttontext",
+      "type": "string"
+    }, {
+      "type": "boolean",
+      "fieldName": "legend",
+      "label": "Show legend"
+    }, {
+      "type": "boolean",
+      "fieldName": "socialshare",
+      "label": "Include Facebook, Twitter, Email sharing"
+    }, {
+      "type": "boolean",
+      "fieldName": "overview",
+      "label": "Add Overview map"
+    }]
+  }, {
     "category": "Ranking",
-    "fields": [  {
+    "fields": [{
       "type": "paragraph",
       "value": "In order to rank features for display the specified feature service must support the supportsOrderBy property which is available if the service is version 10.1 or greater. "
-    },{
+    }, {
       "type": "layerAndFieldSelector",
       "fieldName": "layerInfo",
       "label": "Ranking layer",
@@ -106,153 +113,80 @@
         "label": "Ranking field"
       }],
       "layerOptions": {
-        "supportedTypes": [
-          "FeatureLayer",
-          "FeatureCollection"
-        ],
-        "geometryTypes": [
-          "esriGeometryPoint",
-          "esriGeometryLine",
-          "esriGeometryPolyline",
-          "esriGeometryPolygon",
-          "esriGeometryMultipoint"
-        ]
+        "supportedTypes": ["FeatureLayer", "FeatureCollection"],
+        "geometryTypes": ["esriGeometryPoint", "esriGeometryLine", "esriGeometryPolyline", "esriGeometryPolygon", "esriGeometryMultipoint"]
       }
-    },{
+    }, {
       "type": "number",
       "fieldName": "count",
       "label": "Number of features to display",
       "placeHolder": "Default vaue is 10"
-    },{
-      "type":"options",
+    }, {
+      "type": "options",
       "fieldName": "order",
       "label": "Rank Order",
-      "options":[{
+      "options": [{
         "label": "Low to High",
         "value": "ASC"
-      },{
+      }, {
         "label": "High to Low",
         "value": "DESC"
       }]
-    },{
+    }, {
       "type": "conditional",
       "condition": false,
       "fieldName": "autoplay",
       "label": "Enable auto play",
-      "items":[
-        {
-          "type":"string",
-          "fieldName": "autoplayspeed",
-          "placeholder": "5000 milliseconds",
-          "label": "Auto play speed (in millseconds)"
-        }
-      ]
-    },{
+      "items": [{
+        "type": "string",
+        "fieldName": "autoplayspeed",
+        "placeholder": "5000 milliseconds",
+        "label": "Auto play speed (in millseconds)"
+      }]
+    }, {
       "type": "options",
       "fieldName": "pagingType",
       "label": "Bullet Display Type",
-      "options":[{
+      "options": [{
         "label": "Bullets",
         "value": "Bullets"
-      },{
+      }, {
         "label": "Label",
         "value": "Label"
-      },{
+      }, {
         "label": "Bullets And Labels",
         "value": "BulletsAndLabel"
-      },{
+      }, {
         "label": "Progress",
         "value": "progress"
-      },{
+      }, {
         "label": "Slider",
         "value": "slider"
       }]
-    },{
+    }, {
       "type": "paragraph",
       "value": "Display text listing the rank # of the selected feature. Define custom text to wrap around the current rank and total. <br><br> To display the current number and total number, the custom text should include both {current} and {total}.  Here is an example:  This feature is ranked {current} of {total}"
-    },{
+    }, {
       "type": "string",
       "fieldName": "rankLabelTemplate",
       "label": "Custom text to display in paging area",
       "placeHolder": "{current} of {total}"
-    },{
+    }, {
       "type": "paragraph",
       "value": "By default the app will zoom to the extent of the selected features. If you'd like to modify the zoom level specify a new zoom level value here."
-    },{
-      "type": "string",
+    }, {
+      "type": "scalelist",
       "fieldName": "selectionZoomScale",
-      "label": "Custom zoom scale",
-      "options":[
-        {
-             "label":"Default",
-             "value":null
-        },{
-            "label":"Countries - Big",
-            "value":"25000000"
-         },{
-            "label":"Countries - Small",
-            "value":"12000000"
-         },
-         {
-            "label":"States/Provinces",
-            "value":"6000000"
-         },
-         {
-            "label":"State/Province",
-            "value":"3000000"
-         },
-         {
-            "label":"Counties",
-            "value":"1500000"
-         },
-         {
-            "label":"County",
-            "value":"750000"
-         },
-         {
-            "label":"Metropolitan Area",
-            "value":"320000"
-         },
-         {
-            "label":"Cities",
-            "value":"160000"
-         },
-         {
-            "label":"City",
-            "value":"80000"
-         },
-         {
-            "label":"Town",
-            "value":"40000"
-         },
-         {
-            "label":"Neighborhood",
-            "value":"20000"
-         },
-         {
-            "label":"Streets",
-            "value":"10000"
-         },
-         {
-            "label":"Street",
-            "value":"5000"
-         },
-         {
-            "label":"Buildings",
-            "value":"2500"
-         },{
-            "label": "Building",
-            "value": "1250"
-         }
-      ]
+      "label": "Custom zoom scale"
     }]
   }],
   "values": {
     "autoplay": false,
     "socialshare": false,
     "legend": true,
+    "overview": false,
     "order": "DESC",
-    "count":10,
+    "count": 10,
     "symbolcolor": "#00ffff",
     "navcolor": "#fff",
     "headercolor": "#5d5d5d",

@@ -29,6 +29,7 @@ define({
   "title": null,
   "description": null,
   "legend": true,
+  "overview": false,
   "layerInfo": {
     "id": null, //id of the search layer as defined in the web map
     "fields": [] //Name of the string field to search

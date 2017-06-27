@@ -50,7 +50,7 @@ define([
   "application/MapUrlParams",
 
   "dojo/domReady!"
-], function(
+], function (
   declare, lang,
   array,
   kernel,
@@ -72,7 +72,7 @@ define([
     config: {},
     numSlides: 0,
     featureSwipe: null,
-    startup: function(config) {
+    startup: function (config) {
       parser.parse();
       document.documentElement.lang = kernel.locale;
       // config will contain application and user defined info for the template such as i18n strings, the web map id
@@ -111,9 +111,9 @@ define([
           geometryService: this.config.helperServices.geometry.url
         });
 
-        mapParams.processUrlParams().then(lang.hitch(this, function(urlParams) {
+        mapParams.processUrlParams().then(lang.hitch(this, function (urlParams) {
           this._createWebMap(itemInfo, urlParams);
-        }), lang.hitch(this, function(error) {
+        }), lang.hitch(this, function (error) {
           this.reportError(error);
         }));
 
@@ -124,7 +124,7 @@ define([
         def.reject(error);
       }
     },
-    reportError: function(error) {
+    reportError: function (error) {
       // remove loading class from body
       domClass.remove(document.body, "app-loading");
       domClass.add(document.body, "app-error");
@@ -134,7 +134,7 @@ define([
       }
       return error;
     },
-    _addLocalizedText: function() {
+    _addLocalizedText: function () {
       dom.byId("closeInfo").innerHTML = this.config.buttontext || "Start here"; // this.config.i18n.closebutton.label;
 
       dom.byId("next").value = this.config.i18n.navigation.nextLabel;
@@ -157,7 +157,7 @@ define([
       });
 
     },
-    _updateColorScheme: function() {
+    _updateColorScheme: function () {
       // Update app to use color scheme defined in config
       domQuery(".navcolor").style("color", this.config.navcolor);
       domQuery(".closeNav").style("background-color", this.config.bgcolor);
@@ -168,6 +168,7 @@ define([
       domQuery(".title-row").style("color", this.config.headercolor);
       domQuery(".title-row").style("background-color", this.config.headerbackground);
       domQuery(".share-btn").style("color", this.config.headercolor);
+      domQuery(".info-btn").style("color", this.config.headercolor);
 
       // Calculate toolbar bottom border color
       //var borderColor = this._modifyColor(this.config.headercolor, 0.3);
@@ -183,14 +184,14 @@ define([
         "color": this.config.buttontextcolor
       });
     },
-    _createWebMap: function(itemInfo, params) {
+    _createWebMap: function (itemInfo, params) {
       arcgisUtils.createMap(itemInfo, "mapDiv", {
         mapOptions: params.mapOptions || {},
         usePopupManager: true,
         layerMixins: this.config.layerMixins || [],
         editable: this.config.editable,
         bingMapsKey: this.config.bingKey
-      }).then(lang.hitch(this, function(response) {
+      }).then(lang.hitch(this, function (response) {
         this.map = response.map;
         this.symbolLayer = new GraphicsLayer();
         this.map.addLayer(this.symbolLayer);
@@ -203,20 +204,31 @@ define([
         if (this.config.socialshare) {
           domClass.remove(dom.byId("socialToolbar"), "hide");
           // Setup click events for sharing nodes
-          require(["application/Share"], lang.hitch(this, function(Share) {
+          require(["application/Share"], lang.hitch(this, function (Share) {
             var share = new Share({
               config: this.config,
               map: this.map,
               title: this.config.title || null,
               summary: this.config.subtitle || null
             });
-            domQuery(".share-btn").on("click", lang.hitch(this, function(node) {
+            domQuery(".share-btn").on("click", lang.hitch(this, function (node) {
               var activeIndex = null;
               if (this.featureSwipe && this.featureSwipe.activeIndex) {
                 activeIndex = this.featureSwipe.activeIndex;
               }
               share.shareLink(node, activeIndex, node.target.id);
             }));
+          }));
+        }
+
+        // Add overview map if enabled
+        if (this.config.overview) {
+          require(["esri/dijit/OverviewMap"], lang.hitch(this, function (OverviewMap) {
+            var overviewMapWidget = new OverviewMap({
+              map: this.map,
+              visible: true
+            });
+            overviewMapWidget.startup();
           }));
         }
 
@@ -247,7 +259,7 @@ define([
         }
         if (this.config.legend) {
           // enable legend button and add legend
-          require(["esri/dijit/Legend"], lang.hitch(this, function(Legend) {
+          require(["esri/dijit/Legend"], lang.hitch(this, function (Legend) {
             if (!Legend) {
               return;
             }
@@ -267,7 +279,7 @@ define([
         if (this.config.layerInfo.id !== null && this.config.layerInfo.fields.length > 0) {
           analysisLayer = this.map.getLayer(this.config.layerInfo.id);
         } else {
-          response.itemInfo.itemData.operationalLayers.some(lang.hitch(this, function(l) {
+          response.itemInfo.itemData.operationalLayers.some(lang.hitch(this, function (l) {
             //if a layer isn't defined get the first feature layer with popups defined from the map
             // and use the first field as the analysis field.
             if (l.layerObject) {
@@ -283,11 +295,11 @@ define([
         if (analysisLayer) {
           this._calculateStatistics(analysisLayer);
         }
-      }), function(error) {
+      }), function (error) {
         this.reportError(error);
       });
     },
-    _getSymbol: function(layer) {
+    _getSymbol: function (layer) {
       var symbol = null;
       if (layer && layer.geometryType) {
         if (layer.geometryType === "esriGeometryPolygon") {
@@ -305,7 +317,7 @@ define([
       }
       return symbol;
     },
-    _calculateStatistics: function(layer) {
+    _calculateStatistics: function (layer) {
       // Check for advanced query support so we can use order by
       if (layer && layer.type && layer.type === "Feature Layer") {
         if (layer.supportsAdvancedQueries) {
@@ -318,9 +330,9 @@ define([
             query.orderByFields = [fieldName + " " + this.config.order]; // field + ASC or DESC
             query.outFields = ["*"];
 
-            layer.queryFeatures(query, lang.hitch(this, function(results) {
+            layer.queryFeatures(query, lang.hitch(this, function (results) {
               this._getFeatures(results.features, layer);
-            }), lang.hitch(this, function(error) {
+            }), lang.hitch(this, function (error) {
               console.log("Error", error);
               this.reportError(error);
             }));
@@ -333,7 +345,7 @@ define([
           if (collField) {
             collField = ["Name"];
             var g = layer.graphics;
-            g.sort(function(obj1, obj2) {
+            g.sort(function (obj1, obj2) {
               return obj1.attributes[collField] < obj2.attributes[collField];
             });
             if (this.config.order === "DESC") {
@@ -347,7 +359,7 @@ define([
         }
       }
     },
-    _getFields: function() {
+    _getFields: function () {
       var fields = this.config.layerInfo.fields || null,
         fieldName = null;
       if (fields && fields.length) {
@@ -358,13 +370,13 @@ define([
       }
       return fieldName;
     },
-    _getFeatures: function(graphics, layer) {
+    _getFeatures: function (graphics, layer) {
       // get top x features and create slides.
       domClass.remove(document.body, "app-loading");
       var topResults = graphics.slice(0, this.config.count);
       // enable explore button
       domClass.remove("closeInfo", "disabled");
-      on.once(dom.byId("closeInfo"), "click", lang.hitch(this, function() {
+      on.once(dom.byId("closeInfo"), "click", lang.hitch(this, function () {
         // hide the info panel
         domClass.add("titleHeader", "hide");
         domClass.remove("slideNav", "hide");
@@ -376,9 +388,9 @@ define([
         dom.byId("closeInfo").click();
       }
     },
-    _createFeatureSlides: function(features, layer) {
+    _createFeatureSlides: function (features, layer) {
       this.numSlides = features.length || 0;
-      features.forEach(lang.hitch(this, function(feature, i) {
+      features.forEach(lang.hitch(this, function (feature, i) {
         var idAttributeField = feature.getLayer().objectIdField,
           featureContent = feature.getContent(),
           featureTitle = feature.getTitle();
@@ -422,7 +434,7 @@ define([
         });
         domQuery(".noUi-handle").style("color", this.config.navcolor);
         this._updateHandleText(1);
-        this.slider.on("slide", lang.hitch(this, function(e) {
+        this.slider.on("slide", lang.hitch(this, function (e) {
           var num = Number(e[0]);
           if (this.config.autoloop) {
             this.featureSwipe.fixLoop();
@@ -449,7 +461,7 @@ define([
           this._goToSlide(this.featureSwipe, layer);
         }
       }
-      this.featureSwipe.on("SlideChangeStart", lang.hitch(this, function(e) {
+      this.featureSwipe.on("SlideChangeStart", lang.hitch(this, function (e) {
         if (this.config.pagingType === "slider" && this.slider) {
           if (e.activeIndex === 0) {
             e.activeIndex = this.numSlides;
@@ -462,25 +474,25 @@ define([
         this._goToSlide(this.featureSwipe, layer);
       }));
     },
-    _updateHandleText: function(num) {
+    _updateHandleText: function (num) {
       var handle = domQuery(".noUi-handle")[0];
       if (handle) {
         handle.innerHTML = "<span>" + num + "</span>";
       }
     },
-    _setupButtonClickHandlers: function(layer) {
+    _setupButtonClickHandlers: function (layer) {
       //setup click handle for button to toggle title and desc on small devices
-      on(dom.byId("toggleInfo"), "click", lang.hitch(this, function(e) {
+      on(dom.byId("toggleInfo"), "click", lang.hitch(this, function (e) {
         this._toggleInfoPanel("info", layer);
         domClass.add("toggleInfo", "hide");
       }));
       // Button on info dialog that closes info panel
-      on(dom.byId("closeInfo"), "click", lang.hitch(this, function(e) {
+      on(dom.byId("closeInfo"), "click", lang.hitch(this, function (e) {
         this._toggleInfoPanel("popup", layer);
         domClass.remove("toggleInfo", "hide");
       }));
     },
-    _defineSwipeOptions: function(features) {
+    _defineSwipeOptions: function (features) {
       var swipeOptions = {
         a11y: true,
         spaceBetween: 10,
@@ -508,7 +520,7 @@ define([
           });
         }
         swipeOptions.paginationClickable = true;
-        swipeOptions.paginationBulletRender = lang.hitch(this, function(index, className) {
+        swipeOptions.paginationBulletRender = lang.hitch(this, function (index, className) {
           var f = features[index];
           var title = f.getTitle();
           var l = f.getLayer();
@@ -529,7 +541,7 @@ define([
       }
       return swipeOptions;
     },
-    _createPaginationText: function(swiper, current, total) {
+    _createPaginationText: function (swiper, current, total) {
       if (!swiper) {
         swiper = this.featureSwipe;
       }
@@ -549,10 +561,10 @@ define([
       };
       dom.byId("pageLabel").innerHTML = "<span class='page-label'>" + lang.replace(template, labelObj) + "</span>";
     },
-    _goToSlide: function(featureSwipe, layer) {
+    _goToSlide: function (featureSwipe, layer) {
       this._selectFeatures(featureSwipe.slides[featureSwipe.activeIndex].id, layer);
     },
-    _toggleInfoPanel: function(active, layer) {
+    _toggleInfoPanel: function (active, layer) {
       domQuery(".panel-nav").addClass("hide");
       // remove just the active
       if (active === "popup") {
@@ -563,11 +575,11 @@ define([
         domClass.remove("titleHeader", "hide");
       }
     },
-    _selectFeatures: function(id, layer) {
+    _selectFeatures: function (id, layer) {
       this.symbolLayer.clear();
       var q = new Query();
       q.objectIds = [id];
-      layer.selectFeatures(q).then(lang.hitch(this, function() {
+      layer.selectFeatures(q).then(lang.hitch(this, function () {
         var sel = layer.getSelectedFeatures();
         var level = this.config.selectionZoomLevel;
         var scale = this.config.selectionZoomScale;
@@ -584,11 +596,11 @@ define([
           } else {
             this.map.setExtent(extent, true);
           }
-        //layer.refresh();
+          //layer.refresh();
         }
       }));
     },
-    _modifyColor: function(color, percent) {
+    _modifyColor: function (color, percent) {
       // Lighten/darken colors
       //http://stackoverflow.com/questions/5560248/programmatically-lighten-or-darken-a-hex-color-or-rgb-and-blend-colors
       var f = parseInt(color.slice(1), 16),
