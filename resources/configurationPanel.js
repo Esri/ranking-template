@@ -1,9 +1,9 @@
 {
-  "displayType": "tabs",
   "configurationSettings": [{
     "category": "General",
     "fields": [{
-      "type": "webmap"
+      "type": "webmap",
+      "conditions": ["featurelayer"]
     }, {
       "type": "appproxies"
     }, {
