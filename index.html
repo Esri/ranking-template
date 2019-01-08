@@ -4,7 +4,6 @@
 <head>
   <title></title>
   <meta charset="utf-8">
-  <meta name="fragment" content="!">
   <!-- Responsive -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,8 +13,8 @@
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/nouislider.min.css">
 
-  <link rel="stylesheet" href="https://js.arcgis.com/3.22/esri/themes/calcite/dijit/calcite.css">
-  <link rel="stylesheet" href="https://js.arcgis.com/3.22/esri/themes/calcite/esri/esri.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/3.27/esri/themes/calcite/dijit/calcite.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/3.27/esri/themes/calcite/esri/esri.css">
   <!-- Load any application specific styles -->
   <link rel="stylesheet" href="css/swiper.min.css">
   <link rel="stylesheet" href="css/main.min.css">
@@ -33,20 +32,20 @@
           <!--class="hide"-->
           <toolbar id="toolbar">
             <span id="socialToolbar" class="social-icons hide">
-            <button id="facebookShare" type="button" class="btn btn-link share-btn nav-btn">
-              <span id="facebook" class="fa fa-facebook-official" aria-hidden="true"></span>
-            </button>
-            <button id="twitterShare" type="button" class="btn btn-link share-btn nav-btn">
-              <span id="twitter" class="fa fa-twitter" aria-hidden="true"></span>
-            </button>
-            <button id="linkShare" type="button" class="btn btn-link share-btn nav-btn">
-              <span class="fa fa-link" aria-hidden="true"></span>
-            </button>
+              <button id="facebookShare" type="button" class="btn btn-link share-btn nav-btn">
+                <span id="facebook" class="fa fa-facebook-official" aria-hidden="true"></span>
+              </button>
+              <button id="twitterShare" type="button" class="btn btn-link share-btn nav-btn">
+                <span id="twitter" class="fa fa-twitter" aria-hidden="true"></span>
+              </button>
+              <button id="linkShare" type="button" class="btn btn-link share-btn nav-btn">
+                <span class="fa fa-link" aria-hidden="true"></span>
+              </button>
             </span>
             <!--btn-link -->
             <button id="toggleInfo" type="button" class="hide btn btn-link info-btn nav-btn">
-            <span class="fa esri-icon-description" aria-hidden="true"></span>
-          </button>
+              <span class="fa esri-icon-description" aria-hidden="true"></span>
+            </button>
           </toolbar>
         </div>
         <!--end row-->
@@ -57,7 +56,7 @@
           </div>
           <div class="closeNav">
             <button id="closeInfo" type="button" class="btn btn-default btn-lg disabled  btn-block">
-                </button>
+            </button>
           </div>
         </div>
         <div id="popupContainer" class="swiper-container panel-nav">
@@ -82,8 +81,12 @@
     </div>
   </div>
   <script type="text/javascript">
+    var webgl = location.search.match(/webgl=([\w-]+)/) ? (RegExp.$1).toLowerCase() === "false" ? 0 : 1 : 1;
     var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
     var dojoConfig = {
+      has: {
+        "esri-featurelayer-webgl": webgl
+      },
       async: true,
       // The locationPath logic below may look confusing but all its doing is
       // enabling us to load the api from a CDN and load local modules from the correct location.
@@ -102,10 +105,11 @@
     if (urlLocale) {
       dojoConfig.locale = urlLocale;
     }
+
   </script>
   <script type="text/javascript" src="js/swiper.min.js"></script>
   <script type="text/javascript" src="js/nouislider.min.js"></script>
-  <script type="text/javascript" src="https://js.arcgis.com/3.22/"></script>
+  <script type="text/javascript" src="https://js.arcgis.com/3.27/"></script>
 
   <script type="text/javascript">
     require([
@@ -132,6 +136,7 @@
         myApp.reportError(error);
       });
     });
+
   </script>
 </body>
 

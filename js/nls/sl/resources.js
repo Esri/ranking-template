@@ -16,26 +16,26 @@
  */
 define({
   "map": {
-    "error": "Imposibil de creat harta",
+    "error": "Karte ni mogoče ustvariti",
     "licenseError": {
-      "message": "Contul dvs. nu este licențiat să utilizeze aplicații configurabile care nu sunt publice. Solicitați-i administratorului organizației să vă aloce un tip de utilizator care include aplicații esențiale sau o licență pentru aplicații esențiale de completare.",
-      "title": "Nelicențiat"
+      "message": "Vaš račun ni licenciran za uporabo konfigurabilnih aplikacij, ki niso javne. Prosite administratorja v vaši organizaciji, da vam dodeli tip uporabnika, ki vsebuje aplikacije Essential Apps ali licenco za dodatne aplikacije Essential Apps.",
+      "title": "Brez licence"
     }
   },
   "errors": {
-    "layerNotFound": "Stratul tematic de clasificare nu este specificat"
+    "layerNotFound": "Razvrstitveni sloj ni naveden"
   },
   "closebutton": {
-    "label": "Exploraţi"
+    "label": "Razišči"
   },
   "toolbar": {
-    "legendLabel": "legendă",
+    "legendLabel": "legenda",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Link"
+    "linkShare": "Povezava"
   },
   "navigation": {
-    "nextLabel": "Următorul",
-    "previousLabel": "Anterior"
+    "nextLabel": "Naslednji",
+    "previousLabel": "Prejšnji"
   }
 });

@@ -192,112 +192,120 @@ define([
         editable: this.config.editable,
         bingMapsKey: this.config.bingKey
       }).then(lang.hitch(this, function (response) {
-        this.map = response.map;
-        this.symbolLayer = new GraphicsLayer();
-        this.map.addLayer(this.symbolLayer);
-        // Add home button
-        var home = new HomeButton({
-          map: this.map
-        }, domConstruct.create("div", {}, domQuery(".esriSimpleSliderIncrementButton")[0], "after"));
-        home.startup();
-        // show social sharing icons if enabled
-        if (this.config.socialshare) {
-          domClass.remove(dom.byId("socialToolbar"), "hide");
-          // Setup click events for sharing nodes
-          require(["application/Share"], lang.hitch(this, function (Share) {
-            var share = new Share({
-              config: this.config,
-              map: this.map,
-              title: this.config.title || null,
-              summary: this.config.subtitle || null
-            });
-            domQuery(".share-btn").on("click", lang.hitch(this, function (node) {
-              var activeIndex = null;
-              if (this.featureSwipe && this.featureSwipe.activeIndex) {
-                activeIndex = this.featureSwipe.activeIndex;
-              }
-              share.shareLink(node, activeIndex, node.target.id);
-            }));
-          }));
-        }
-
-        // Add overview map if enabled
-        if (this.config.overview) {
-          require(["esri/dijit/OverviewMap"], lang.hitch(this, function (OverviewMap) {
-            var overviewMapWidget = new OverviewMap({
-              map: this.map,
-              visible: true
-            });
-            overviewMapWidget.startup();
-          }));
-        }
-
-        var title = this.config.title || response.itemInfo.item.title;
-        document.title = title;
-        domAttr.set("toggleInfo", {
-          "title": title,
-          "aria-label": title
-        });
-
-        dom.byId("panelTitle").innerHTML = title;
-        dom.byId("description").innerHTML = this.config.description || response.itemInfo.item.description;
-        domClass.remove(document.body, "app-loading");
-
-        if (params.markerGraphic) {
-          // Add a marker graphic with an optional info window if
-          // one was specified via the marker url parameter
-          var markerLayer = new GraphicsLayer();
-
-          this.map.addLayer(markerLayer);
-          markerLayer.add(params.markerGraphic);
-
-          if (params.markerGraphic.infoTemplate) {
-            this.map.infoWindow.setFeatures([params.markerGraphic]);
-            this.map.infoWindow.show(params.markerGraphic.geometry);
-          }
-          this.map.centerAt(params.markerGraphic.geometry);
-        }
-        if (this.config.legend) {
-          // enable legend button and add legend
-          require(["esri/dijit/Legend"], lang.hitch(this, function (Legend) {
-            if (!Legend) {
-              return;
-            }
-            //get legend layers
-            var layers = arcgisUtils.getLegendLayers(response);
-            if (layers && layers.length > 0) {
-              var legend = new Legend({
+          this.map = response.map;
+          this.symbolLayer = new GraphicsLayer();
+          this.map.addLayer(this.symbolLayer);
+          // Add home button
+          var home = new HomeButton({
+            map: this.map
+          }, domConstruct.create("div", {}, domQuery(".esriSimpleSliderIncrementButton")[0], "after"));
+          home.startup();
+          // show social sharing icons if enabled
+          if (this.config.socialshare) {
+            domClass.remove(dom.byId("socialToolbar"), "hide");
+            // Setup click events for sharing nodes
+            require(["application/Share"], lang.hitch(this, function (Share) {
+              var share = new Share({
+                config: this.config,
                 map: this.map,
-                layerInfos: layers
-              }, "legendDiv");
-              legend.startup();
+                title: this.config.title || null,
+                summary: this.config.subtitle || null
+              });
+              domQuery(".share-btn").on("click", lang.hitch(this, function (node) {
+                var activeIndex = null;
+                if (this.featureSwipe && this.featureSwipe.activeIndex) {
+                  activeIndex = this.featureSwipe.activeIndex;
+                }
+                share.shareLink(node, activeIndex, node.target.id);
+              }));
+            }));
+          }
+
+          // Add overview map if enabled
+          if (this.config.overview) {
+            require(["esri/dijit/OverviewMap"], lang.hitch(this, function (OverviewMap) {
+              var overviewMapWidget = new OverviewMap({
+                map: this.map,
+                visible: true
+              });
+              overviewMapWidget.startup();
+            }));
+          }
+
+          var title = this.config.title || response.itemInfo.item.title;
+          document.title = title;
+          domAttr.set("toggleInfo", {
+            "title": title,
+            "aria-label": title
+          });
+
+          dom.byId("panelTitle").innerHTML = title;
+          dom.byId("description").innerHTML = this.config.description || response.itemInfo.item.description;
+          domClass.remove(document.body, "app-loading");
+
+          if (params.markerGraphic) {
+            // Add a marker graphic with an optional info window if
+            // one was specified via the marker url parameter
+            var markerLayer = new GraphicsLayer();
+
+            this.map.addLayer(markerLayer);
+            markerLayer.add(params.markerGraphic);
+
+            if (params.markerGraphic.infoTemplate) {
+              this.map.infoWindow.setFeatures([params.markerGraphic]);
+              this.map.infoWindow.show(params.markerGraphic.geometry);
             }
-          }));
-        }
-        // Get the analysis layer and make sure it supports statistics
-        var analysisLayer = null;
-        if (this.config.layerInfo.id !== null && this.config.layerInfo.fields.length > 0) {
-          analysisLayer = this.map.getLayer(this.config.layerInfo.id);
-        } else {
-          response.itemInfo.itemData.operationalLayers.some(lang.hitch(this, function (l) {
-            //if a layer isn't defined get the first feature layer with popups defined from the map
-            // and use the first field as the analysis field.
-            if (l.layerObject) {
-              var type = l.layerType || l.layerObject.type;
-              if (l.layerObject.infoTemplate !== undefined && (type === "Feature Layer" || type === "ArcGISFeatureLayer")) {
-                analysisLayer = l.layerObject;
-                this.config.layerInfo.fields = [analysisLayer.fields[0].name];
-                return true;
+            this.map.centerAt(params.markerGraphic.geometry);
+          }
+          if (this.config.legend) {
+            // enable legend button and add legend
+            require(["esri/dijit/Legend"], lang.hitch(this, function (Legend) {
+              if (!Legend) {
+                return;
               }
-            }
-          }));
-        }
-        if (analysisLayer) {
-          this._calculateStatistics(analysisLayer);
-        }
-      }), function (error) {
-        this.reportError(error);
-      });
+              //get legend layers
+              var layers = arcgisUtils.getLegendLayers(response);
+              if (layers && layers.length > 0) {
+                var legend = new Legend({
+                  map: this.map,
+                  layerInfos: layers
+                }, "legendDiv");
+                legend.startup();
+              }
+            }));
+          }
+          // Get the analysis layer and make sure it supports statistics
+          var analysisLayer = null;
+
+          if (this.config.layerInfo.id !== null && this.config.layerInfo.fields.length > 0) {
+            analysisLayer = this.map.getLayer(this.config.layerInfo.id);
+          } else {
+            console.log("Items", response.itemInfo.itemData.operationalLayers);
+            response.itemInfo.itemData.operationalLayers.some(lang.hitch(this, function (l) {
+              //if a layer isn't defined get the first feature layer with popups defined from the map
+              // and use the first field as the analysis field.
+
+              if (l.layerObject) {
+                var type = l.layerType || l.layerObject.type;
+                if (l.layerObject.infoTemplate !== undefined && (type === "Feature Layer" || type === "ArcGISFeatureLayer")) {
+                  analysisLayer = l.layerObject;
+                  this.config.layerInfo.fields = [analysisLayer.fields[0].name];
+                  return true;
+                }
+              } else if (l.featureCollection && l.featureCollection.layers && l.featureCollection.layers.length && l.featureCollection.layers.length > 0) {
+                analysisLayer = l.featureCollection.layers[0].layerObject;
+                this.config.layerInfo.fields = [analysisLayer.fields[0].name];
+
+              }
+            }));
+          }
+          if (analysisLayer) {
+            this._calculateStatistics(analysisLayer);
+          }
+        }),
+        function (error) {
+          this.reportError(error);
+        });
     },
     _getSymbol: function (layer) {
       var symbol = null;
@@ -338,7 +346,7 @@ define([
             }));
           } else {
             console.log("No query field specified");
-            this.reportError(this.config.layerInfo.id + " does not have a query field specified");
+            this.reportError("Layer does not have a query field specified");
           }
         } else if (layer && layer.graphics && layer.graphics.length > 0) {
           var collField = this._getFields();
@@ -354,8 +362,7 @@ define([
             this._getFeatures(g, layer);
           }
         } else {
-          console.log("Advanced Queries not supported");
-          this.reportError(this.config.layerInfo.id + " does not support advanced queries");
+          this.reportError("Layer needs advanced queries support");
         }
       }
     },
@@ -596,7 +603,6 @@ define([
           } else {
             this.map.setExtent(extent, true);
           }
-          //layer.refresh();
         }
       }));
     },

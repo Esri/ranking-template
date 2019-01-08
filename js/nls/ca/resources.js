@@ -16,26 +16,26 @@
  */
 define({
   "map": {
-    "error": "Imposibil de creat harta",
+    "error": "No es pot crear el mapa",
     "licenseError": {
-      "message": "Contul dvs. nu este licențiat să utilizeze aplicații configurabile care nu sunt publice. Solicitați-i administratorului organizației să vă aloce un tip de utilizator care include aplicații esențiale sau o licență pentru aplicații esențiale de completare.",
-      "title": "Nelicențiat"
+      "message": "El vostre compte no té llicència per utilitzar aplicacions configurables que no siguin públiques. Demaneu a l'administrador de l'organització que us assigni un tipus d'usuari que inclogui les aplicacions bàsiques o una llicència d'aplicacions bàsiques de complement.",
+      "title": "Sense llicència"
     }
   },
   "errors": {
-    "layerNotFound": "Stratul tematic de clasificare nu este specificat"
+    "layerNotFound": "Capa de classificació no especificada"
   },
   "closebutton": {
-    "label": "Exploraţi"
+    "label": "Explora"
   },
   "toolbar": {
-    "legendLabel": "legendă",
+    "legendLabel": "llegenda",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Link"
+    "linkShare": "Enllaç"
   },
   "navigation": {
-    "nextLabel": "Următorul",
+    "nextLabel": "Següent",
     "previousLabel": "Anterior"
   }
 });

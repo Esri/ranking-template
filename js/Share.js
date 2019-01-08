@@ -1,13 +1,12 @@
-
-define(["dojo/_base/declare", "dojo/_base/lang", "dojo/Deferred", "dojo/query", "dojo/on", "dojo/dom", "esri/request", "esri/urlUtils", "dijit/focus", "dijit/TooltipDialog", "dijit/popup"], function(
+define(["dojo/_base/declare", "dojo/_base/lang", "dojo/Deferred", "dojo/query", "dojo/on", "esri/request", "esri/urlUtils", "dijit/focus", "dijit/TooltipDialog", "dijit/popup"], function (
   declare, lang,
   Deferred, query, on,
-  dom,
+
   esriRequest, urlUtils, focusUtil,
   TooltipDialog, popup) {
   return declare(null, {
 
-    constructor: function(parameters) {
+    constructor: function (parameters) {
       var defaults = {
         config: {},
         title: window.document.title,
@@ -16,7 +15,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/Deferred", "dojo/query", 
         image: "",
         map: null,
         url: window.location.href,
-        bitlyAPI: location.protocol === "https:" ? "https://api-ssl.bitly.com/v3/shorten" : "http://api.bit.ly/v3/shorten",
+        bitlyAPI: "https://arcg.is/prod/shorten",
         facebookURL: "https://www.facebook.com/sharer/sharer.php?s=100&p[url]={url}&p[images][0]={image}&p[title]={title}&p[summary]={summary}",
         twitterURL: "https://twitter.com/intent/tweet?url={url}&text={title}&hashtags={hashtags}"
       };
@@ -34,9 +33,9 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/Deferred", "dojo/query", 
 
     /* Public Methods */
 
-    shareLink: function(clickNode, slideNum, type) {
+    shareLink: function (clickNode, slideNum, type) {
       console.log(clickNode, slideNum, type);
-      this._getUrl(slideNum).then(lang.hitch(this, function(response) {
+      this._getUrl(slideNum).then(lang.hitch(this, function (response) {
         if (response) {
           var fullLink;
           var shareObj = {
@@ -61,11 +60,11 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/Deferred", "dojo/query", 
               x: clickNode.pageX,
               y: clickNode.pageY
             });
-            query(".tip").forEach(lang.hitch(this, function(node) {
+            query(".tip").forEach(lang.hitch(this, function (node) {
               node.select();
               focusUtil.focus(node);
             }));
-            on.once(this.tooltipDialog, "blur", lang.hitch(this, function() {
+            on.once(this.tooltipDialog, "blur", lang.hitch(this, function () {
               popup.close(this.tooltipDialog);
             }));
 
@@ -78,7 +77,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/Deferred", "dojo/query", 
     /* Private Methods */
 
     //optional array of additional search layers to configure from the application config process
-    _getUrl: function(slide) {
+    _getUrl: function (slide) {
       var deferred = new Deferred();
       var urlObject = urlUtils.urlToObject(window.location.href);
       urlObject.query = urlObject.query || {};
@@ -106,33 +105,27 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/Deferred", "dojo/query", 
           url += i + "=" + urlObject.query[i];
         }
       }
-      if (this.config.bitlyKey && this.config.bitlyLogin) {
-        // shorten the link
-        var bitlyAPI = location.protocol === "https:" ? "https://api-ssl.bitly.com/v3/shorten" : "http://api.bit.ly/v3/shorten";
-        esriRequest({
-          url: bitlyAPI,
-          callbackParamName: "callback",
-          content: {
-            uri: url,
-            login: this.config.bitlyLogin,
-            apiKey: this.config.bitlyKey,
-            f: "json"
-          },
-          load: lang.hitch(this, function(response) {
-            if (response && response.data && response.data.url) {
-              deferred.resolve(response.data.url);
-            } else {
-              deferred.resolve(null);
-            }
-          }),
-          error: function(error) {
-            console.log(error);
+      // shorten the link
+      esriRequest({
+        url: this.bitlyAPI,
+        callbackParamName: "callback",
+        content: {
+          longUrl: url,
+          f: "json"
+        },
+        load: lang.hitch(this, function (response) {
+          if (response && response.data && response.data.url) {
+            deferred.resolve(response.data.url);
+          } else {
             deferred.resolve(null);
           }
-        });
-      } else {
-        deferred.resolve(url);
-      }
+        }),
+        error: function (error) {
+          console.log(error);
+          deferred.resolve(null);
+        }
+      });
+
       return deferred.promise;
     }
 

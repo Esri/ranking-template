@@ -16,26 +16,26 @@
  */
 define({
   "map": {
-    "error": "Imposibil de creat harta",
+    "error": "Nem sikerült létrehozni a térképet",
     "licenseError": {
-      "message": "Contul dvs. nu este licențiat să utilizeze aplicații configurabile care nu sunt publice. Solicitați-i administratorului organizației să vă aloce un tip de utilizator care include aplicații esențiale sau o licență pentru aplicații esențiale de completare.",
-      "title": "Nelicențiat"
+      "message": "Az Ön fiókjának licence nem terjed ki a nem nyilvános konfigurálható alkalmazásokra. Igényelje a szervezete adminisztrátorától, hogy rendeljen Önhöz olyan felhasználótípust, amely tartalmazza az alapvető alkalmazásokat, vagy egy kiegészítő alapvető alkalmazásokra vonatkozó licencet.",
+      "title": "Nincs licence"
     }
   },
   "errors": {
-    "layerNotFound": "Stratul tematic de clasificare nu este specificat"
+    "layerNotFound": "Prioritási réteg nincs megadva"
   },
   "closebutton": {
-    "label": "Exploraţi"
+    "label": "Böngészés"
   },
   "toolbar": {
-    "legendLabel": "legendă",
+    "legendLabel": "jelmagyarázat",
     "facebookShare": "Facebook",
     "twitterShare": "Twitter",
-    "linkShare": "Link"
+    "linkShare": "Hivatkozás"
   },
   "navigation": {
-    "nextLabel": "Următorul",
-    "previousLabel": "Anterior"
+    "nextLabel": "Következő",
+    "previousLabel": "Előző"
   }
 });
